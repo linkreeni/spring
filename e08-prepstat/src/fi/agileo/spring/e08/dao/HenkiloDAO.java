@@ -131,4 +131,33 @@ public class HenkiloDAO {
 
 	}
 
+	/**
+	 * Lisää henkilön tietokantaan
+	 * @param h Lisättävän henkilön tiedot
+	 */
+	public void poista(String id) throws DAOPoikkeus{
+			
+		//avataan yhteys
+		Connection yhteys = avaaYhteys();
+		
+		try {
+			
+			//suoritetaan haku
+			
+			//alustetaan sql-lause
+			String sql = "delete from henkilo where id = " + id;
+			PreparedStatement lause = yhteys.prepareStatement(sql);
+			
+			//suoritetaan lause
+			lause.executeUpdate();
+			System.out.println("POISTETTIIN HENKILÖ TIETOKANNASTA, JONKA ID OLI "+id+"!");
+		} catch(Exception e) {
+			//JOTAIN VIRHETTÄ TAPAHTUI
+			throw new DAOPoikkeus("Henkilön lisääntymisyritys aiheutti virheen", e);
+		}finally {
+			//LOPULTA AINA SULJETAAN YHTEYS
+			suljeYhteys(yhteys);
+		}
+
+	}
 }

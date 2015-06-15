@@ -27,7 +27,7 @@
 						<td><c:out value="${henk.id}" /></td>
 						<td><c:out value="${henk.etunimi}" /></td>
 						<td><c:out value="${henk.sukunimi}" /></td>
-						<td>&nbsp;<!-- Tässä olisi hyvä paikka delete-napille --></td>
+						<td><button type="submit" class="del" name="id" value="${henk.id}"><b>X</b></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

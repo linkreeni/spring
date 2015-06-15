@@ -34,20 +34,25 @@ public class HenkiloServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		String enimi = request.getParameter("etunimi");
 		String snimi = request.getParameter("sukunimi");
 		
 		Henkilo h = new Henkilo(enimi, snimi);
-
+			
 		try {
 			HenkiloDAO hDao = new HenkiloDAO();
-			hDao.lisaa(h);
+			
+			if (id != null)
+				hDao.poista(id);
+			else
+				hDao.lisaa(h);
 		} catch (DAOPoikkeus e) {
 			throw new ServletException(e);
 		}
 		
-		
 		response.sendRedirect("henkilot"); //redirect doGet
+		
 	}
     
 	/**
